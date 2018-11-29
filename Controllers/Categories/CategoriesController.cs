@@ -23,7 +23,7 @@ namespace DataDrivenDiversity.Controllers.Categories
             var categories = _Api.GetCategories().Result;
 
             var model = new CategoriesViewModel { Categories = categories.Results };
-            return View();
+            return View(model);
         }
     }
 }
