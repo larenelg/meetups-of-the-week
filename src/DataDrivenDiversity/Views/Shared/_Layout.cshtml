@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DataDrivenDiversity</title>
+
+    <link href="https://unpkg.com/nes.css@0.0.2/css/nes.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="content">
+        <nav class="container with-title is-center">
+            <label class="title">Navigation</label>
+            <ul>
+                <li><a asp-action="Index" asp-controller="Home">Meetups</a></li>
+                <li><a asp-action="Index" asp-controller="Categories">Categories</a></li>
+                <li><a asp-action="Index" asp-controller="Cities">Cities</a></li>
+            </ul>
+        </nav>
+
+        <main class="container with-title">
+            @RenderBody()
+        </main>
+    </div>
+    
+    <hr />
+    <footer>
+        <p>&copy; 2018 - DataDrivenDiversity</p>
+    </footer>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

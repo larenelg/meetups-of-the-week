@@ -1,0 +1,13 @@
+@model GroupViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1 class="title">@Model.Name</h1>
+<p>Organiser: @Model.Organiser</p>
+<p>Created: @Model.Created</p>
+<p>Total members: @Model.Members</p>
+
+<a asp-controller="Group" asp-action="Events">Events</a>
+
+@Html.Raw(@Model.Description)
