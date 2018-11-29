@@ -18,18 +18,29 @@ namespace DataDrivenDiversity.Controllers.Home
         {
             _Api = _api;
         }
-        public IActionResult Index()
+        public IActionResult Index(GroupsQueryParams query)
         {
-            var groups = _Api.SearchGroups(new GroupsQueryParams {
-                Country = "Australia",
-                Lat = "-27.470125",
-                Lon = "153.021072",
-                Radius = 10,
-                CategoryId = 34
-             }).Result;
+            if (query.CategoryId == 0)
+            {
+                query = new GroupsQueryParams {
+                    Country = "Australia",
+                    Lat = "-27.470125",
+                    Lon = "153.021072",
+                    Radius = 10,
+                    CategoryId = 34
+                };
+            }
 
-            var model = new GroupsViewModel { Groups = groups.Results };
+            var groups = _Api.SearchGroups(query).Result;
+
+            var model = new GroupsViewModel { Groups = groups.Results, Query = query };
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Search(GroupsQueryParams query)
+        {
+            return RedirectToAction("Index", query);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -18,5 +18,8 @@ namespace DataDrivenDiversity.Api
 
          [Get("/2/groups")]
          Task<MeetupResponse<MeetupGroup>> SearchGroups(GroupsQueryParams query);
+
+         [Get("/{urlname}?only=id,name,status,link,urlname,description,created,members,organizer")]
+         Task<MeetupGroupDetails> GetGroup(string urlname);
     }
 }

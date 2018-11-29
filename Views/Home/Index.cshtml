@@ -6,11 +6,31 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<form class="form container with-title" asp-controller="Home" asp-action="Search" method="post">
+    <label class="title">Search</label>
+    <div class="field"><label for="Country">Country</label>
+        <input name="Country" type="text" class="input" value="@Model.Query.Country">
+    </div>
+    <div class="field"><label for="Lat">Latitude</label>
+        <input name="Lat" type="text" class="input" value="@Model.Query.Lat">
+    </div>
+    <div class="field"><label for="Lon">Longitude</label>
+        <input name="Lon" type="text" class="input" value="@Model.Query.Lon">
+    </div>
+    <div class="field"><label for="Radius">Radius (miles)</label>
+        <input name="Radius" type="number" class="input" value="@Model.Query.Radius">
+    </div>
+    <div class="field"><label for="CategoryId">Category ID</label>
+        <input name="CategoryId" type="number" class="input" value="@Model.Query.CategoryId">
+    </div>
+    <input type="submit" value="Search" class="btn is-primary" />
+</form>
+
 <p>Total: @Model.Groups.Count()</p>
 
 <ul>
     @foreach (var group in Model.Groups)
     {
-        <li>@group.Name <span style="color: #ccc">(@group.Members members)</span></li>
+        <li><a asp-controller="Group" asp-action="Index" asp-route-urlname="@group.UrlName">@group.Name</a> <a href="https://www.meetup.com/@group.UrlName/" target="_blank">🔗</a><span style="color: #ccc">(@group.Members members)</span></li>
     }
 </ul>
