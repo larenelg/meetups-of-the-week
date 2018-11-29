@@ -1,6 +1,6 @@
 using System;
 
-namespace data_driven_diversity.Models
+namespace DataDrivenDiversity.Models.View
 {
     public class ErrorViewModel
     {

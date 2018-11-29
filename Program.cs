@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace data_driven_diversity
+namespace DataDrivenDiversity
 {
     public class Program
     {

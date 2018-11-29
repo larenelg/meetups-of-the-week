@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataDrivenDiversity.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,8 +10,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
 
-namespace data_driven_diversity
+namespace DataDrivenDiversity
 {
     public class Startup
     {
@@ -30,6 +32,12 @@ namespace data_driven_diversity
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddTransient<ApiKeyHandler>();
+
+            services.AddRefitClient<IMeetupApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.meetup.com"))
+                .AddHttpMessageHandler<ApiKeyHandler>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
