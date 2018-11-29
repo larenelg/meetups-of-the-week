@@ -5,9 +5,28 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<form class="field" asp-controller="Cities" asp-action="Search" method="post">
+    <label for="Country">Country</label>
+    <input name="Country" type="text" class="input" value="">
+
+    <label for="Lat">Latitude</label>
+    <input name="Lat" type="text" class="input" value="">
+
+
+    <label for="Lon">Longitude</label>
+    <input name="Lon" type="text" class="input" value="">
+
+    <label for="Radius">Radius</label>
+    <input name="Radius" type="number" class="input" value="">
+
+    <input type="submit" value="Search" class="btn is-primary" />
+</form>
+
+<p>Total: @Model.Cities.Count()</p>
+
 <ul>
-    @foreach (var category in Model.Cities)
+    @foreach (var city in Model.Cities)
     {
-        <li>@category.City</li>
+        <li>@city.City <span style="color: #ccc">(@city.Lat,@city.Lon)</span></li>
     }
 </ul>

@@ -5,9 +5,11 @@
 
 <h2 class="title">@ViewData["Title"]</h2>
 
+<p>Total: @Model.Categories.Count()</p>
+
 <ul>
     @foreach (var category in Model.Categories)
     {
-        <li>@category.Name</li>
+        <li>@category.Name <span style="color: #ccc">(ID: @category.Id)</span></li>
     }
 </ul>

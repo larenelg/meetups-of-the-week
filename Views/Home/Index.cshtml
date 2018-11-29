@@ -1,6 +1,16 @@
-﻿@{
+﻿@model GroupsViewModel
+
+@{
     ViewData["Title"] = "Meetups List";
 }
 
 <h1>@ViewData["Title"]</h1>
 
+<p>Total: @Model.Groups.Count()</p>
+
+<ul>
+    @foreach (var group in Model.Groups)
+    {
+        <li>@group.Name <span style="color: #ccc">(@group.Members members)</span></li>
+    }
+</ul>

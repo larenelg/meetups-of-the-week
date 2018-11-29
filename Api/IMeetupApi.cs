@@ -12,5 +12,11 @@ namespace DataDrivenDiversity.Api
 
          [Get("/2/cities")]
          Task<MeetupResponse<MeetupCity>> GetCities();
+
+         [Get("/2/cities")]
+         Task<MeetupResponse<MeetupCity>> SearchCities(CitiesQueryParams query);
+
+         [Get("/2/groups")]
+         Task<MeetupResponse<MeetupGroup>> SearchGroups(GroupsQueryParams query);
     }
 }
