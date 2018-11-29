@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DataDrivenDiversity</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
     <link href="https://unpkg.com/nes.css@0.0.2/css/nes.min.css" rel="stylesheet" />
-
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        <nav>
-            <ul class="flex">
-                <li class="w-10 pa3"><a asp-area="" asp-controller="Home">Home</a></li>
-                <li class="w-10 pa3"><a asp-area="" asp-controller="Categories">Categories</a></li>
-                <li class="w-10 pa3"><a asp-area="" asp-controller="Cities">Cities</a></li>
+    <div id="content">
+        <nav class="container with-title is-center">
+            <label class="title">Navigation</label>
+            <ul>
+                <li><a asp-area="" asp-controller="Home">Home</a></li>
+                <li><a asp-area="" asp-controller="Categories">Categories</a></li>
+                <li><a asp-area="" asp-controller="Cities">Cities</a></li>
             </ul>
         </nav>
 
-        <div class="w-100 pa3">
+        <main class="container with-title">
             @RenderBody()
-        </div>
+        </main>
     </div>
     
     <hr />
