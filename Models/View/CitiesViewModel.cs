@@ -3,8 +3,8 @@ using DataDrivenDiversity.Models.Domain;
 
 namespace DataDrivenDiversity.Models.View
 {
-    public class CategoriesViewModel
+    public class CitiesViewModel
     {
-        public IEnumerable<MeetupCategory> Categories { get; set; }
+        public IEnumerable<MeetupCity> Cities { get; set; }
     }
 }

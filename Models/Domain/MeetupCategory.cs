@@ -1,6 +1,6 @@
 namespace DataDrivenDiversity.Models.Domain
 {
-    public class Category
+    public class MeetupCategory
     {
         public string Name { get; set; }
         public int Id { get; set; }

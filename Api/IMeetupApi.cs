@@ -8,6 +8,9 @@ namespace DataDrivenDiversity.Api
     public interface IMeetupApi
     {
         [Get("/2/categories")]
-         Task<MeetupResponse<Category>> GetCategories();
+         Task<MeetupResponse<MeetupCategory>> GetCategories();
+
+         [Get("/2/cities")]
+         Task<MeetupResponse<MeetupCity>> GetCities();
     }
 }

@@ -1,0 +1,13 @@
+@model CitiesViewModel
+@{
+    ViewData["Title"] = "Cities";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<ul>
+    @foreach (var category in Model.Cities)
+    {
+        <li>@category.City</li>
+    }
+</ul>
