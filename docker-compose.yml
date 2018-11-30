@@ -1,0 +1,20 @@
+version: '2'
+ 
+services:
+  app:
+    environment:
+      - MeetupApiKey=c4e202177d2f21745d32155e201569
+    build:
+      context:  ./src/DataDrivenDiversity
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+
+  nlp:
+    build:
+      context:  ./nlp
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    links:
+      - app
