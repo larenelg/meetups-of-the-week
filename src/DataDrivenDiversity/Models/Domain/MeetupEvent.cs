@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DataDrivenDiversity.Models.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -31,5 +32,8 @@ namespace DataDrivenDiversity.Models.Domain
 
         [AliasAs("description")]
         public string Description { get; set; }
+
+        [JsonIgnore]
+        public SpeakerData SpeakerData { get; set; }
     }
 }

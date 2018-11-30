@@ -1,5 +1,4 @@
 @model EventsViewModel
-
 @{
     ViewData["Title"] = "Event";
 }
@@ -59,8 +58,15 @@
 <ul>
     @foreach (var ev in Model.Events)
     {
-        <li>@ev.Name <span style="color: #ccc">(Date @ev.Time)</span> <span style="color: #ccc">(RSVP @ev.YesRsvpCount)</span></li>
-        <!-- @ev.Description -->
+        @if (ev.SpeakerData != null && ev.SpeakerData.Names != null && ev.SpeakerData.Names.Count() > 1 &&
+            ev.SpeakerData.Pronouns != null && (ev.SpeakerData.Pronouns.Contains("she") || ev.SpeakerData.Pronouns.Contains("She")))
+        {
+            <li>👩‍💻 <a asp-controller="Group" asp-action="Event" asp-route-urlname="@Model" asp-route-id="@ev.Id">@ev.Name</a> <span style="color: #ccc">(Date @ev.Time)</span> <span style="color: #ccc">(RSVP @ev.YesRsvpCount)</span></li>
+        }
+        else
+        {
+            <li> <a asp-controller="Group" asp-action="Event" asp-route-urlname="@Model" asp-route-id="@ev.Id">@ev.Name</a> <span style="color: #ccc">(Date @ev.Time)</span> <span style="color: #ccc">(RSVP @ev.YesRsvpCount)</span></li>
+        }
     }
 </ul>
 

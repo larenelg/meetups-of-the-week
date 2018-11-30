@@ -43,6 +43,25 @@ namespace DataDrivenDiversity.Controllers.Home
             return RedirectToAction("Index", query);
         }
 
+        [HttpGet("stats")]
+        public IActionResult Stats()
+        {
+            var query = new GroupsQueryParams {
+                    Country = "Australia",
+                    Lat = "-27.470125",
+                    Lon = "153.021072",
+                    Radius = 10,
+                    CategoryId = 34
+                };
+
+            var groups = _Api.SearchGroups(query).Result;
+
+            // filter by this year
+            var urlNames = groups.Results.Select(g => g.UrlName);
+
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
