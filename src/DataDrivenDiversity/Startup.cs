@@ -39,6 +39,8 @@ namespace DataDrivenDiversity
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.meetup.com"))
                 .AddHttpMessageHandler<ApiKeyHandler>();
 
+            services.AddRefitClient<IStatsApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -1,1 +1,1 @@
-docker run -p 5000:5000 nlp
+docker run -p 6000:5000 nlp

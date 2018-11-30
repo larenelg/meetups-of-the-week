@@ -60,6 +60,7 @@
     @foreach (var ev in Model.Events)
     {
         <li>@ev.Name <span style="color: #ccc">(Date @ev.Time)</span> <span style="color: #ccc">(RSVP @ev.YesRsvpCount)</span></li>
+        <!-- @ev.Description -->
     }
 </ul>
 

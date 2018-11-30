@@ -22,7 +22,7 @@ namespace DataDrivenDiversity.Api
          [Get("/{urlname}?only=id,name,status,link,urlname,description,created,members,organizer")]
          Task<MeetupGroupDetails> GetGroup(string urlname);
 
-        [Get("/2/events?group_urlname={urlname}&status=past&only=id,name,time,yes_rsvp_count,event_url,status")]
+        [Get("/2/events?group_urlname={urlname}&status=past&only=id,name,time,yes_rsvp_count,event_url,status,description")]
         Task<MeetupResponse<MeetupEvent>> GetPastEvents(string urlname);
     }
 }

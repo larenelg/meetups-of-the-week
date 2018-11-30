@@ -35,10 +35,16 @@ namespace DataDrivenDiversity.Controllers.Groups
         [Route("{urlname}/events")]
         public IActionResult Events(string urlname)
         {
-            var group = _Api.GetPastEvents(urlname).Result;
+            var events = _Api.GetPastEvents(urlname).Result.Results;
+
+            foreach (var ev in events)
+            {
+                
+            }
+
             var model = new EventsViewModel
             {
-                Events = group.Results
+                Events = events
             };
 
             return View(model);

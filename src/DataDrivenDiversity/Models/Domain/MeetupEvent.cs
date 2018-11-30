@@ -29,5 +29,7 @@ namespace DataDrivenDiversity.Models.Domain
         [AliasAs("status")]
         public string Status { get; set; }
 
+        [AliasAs("description")]
+        public string Description { get; set; }
     }
 }
