@@ -33,7 +33,11 @@ namespace DataDrivenDiversity.Controllers.Home
 
             var groups = _Api.SearchGroups(query).Result;
             
-            var model = new GroupsViewModel { Groups = groups.Results, Query = query };
+            var model = new GroupsViewModel { 
+                TotalGroups = groups.Meta.TotalCount,
+                Groups = groups.Results,
+                Query = query
+            };
             return View(model);
         }
 

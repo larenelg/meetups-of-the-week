@@ -4,10 +4,20 @@
 }
 
 <h1 class="title">@Model.Name</h1>
+
+<div class="field">
+    <a asp-controller="Group" asp-action="Events" class="btn is-primary">Events</a>
+</div>
+
+<div class="container with-title">
+<h2 class="title">Info</h2>
 <p>Organiser: @Model.Organiser</p>
 <p>Created: @Model.Created</p>
 <p>Total members: @Model.Members</p>
+</div>
 
-<a asp-controller="Group" asp-action="Events">Events</a>
+<div class="container with-title">
+    <h2 class="title">Description</h2>
+    @Html.Raw(@Model.Description)
+</div>
 
-@Html.Raw(@Model.Description)

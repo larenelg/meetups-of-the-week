@@ -1,5 +1,30 @@
 @model EventViewModel
 
+<label class="title">@Model.GroupUrlName</label>
 <h1>@Model.Event.Name</h1>
 
-<p>@Model.Event.Description</p>
+<div class="container with-title">
+    <h2 class="title">Stats</h2>
+    <p>Time @Model.Event.Time</p>
+    <p>RSVPs @Model.Event.YesRsvpCount</p>
+    <p>Names extracted:</p>
+    <ul>
+    @foreach (var name in @Model.Event.SpeakerData.Names)
+    {
+        <li>@name</li>
+    }
+    </ul>
+    <p>Pronouns extracted:</p>
+    <ul>
+    @foreach (var pronoun in @Model.Event.SpeakerData.Pronouns)
+    {
+        <li>@pronoun</li>
+    }
+    </ul>
+</div>
+
+
+<div class="container with-title">
+    <h2 class="title">Description</h2>
+    @Html.Raw(Model.Event.Description)
+</div>

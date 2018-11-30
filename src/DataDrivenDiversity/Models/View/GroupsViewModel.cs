@@ -8,5 +8,6 @@ namespace DataDrivenDiversity.Models.View
     {
         public IEnumerable<MeetupGroup> Groups { get; set; }
         public GroupsQueryParams Query { get; set; }
+        public int TotalGroups { get; set; }
     }
 }

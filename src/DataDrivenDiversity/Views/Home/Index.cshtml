@@ -4,6 +4,7 @@
     ViewData["Title"] = "Meetup List";
 }
 
+<h1>@ViewData["Title"]</h1>
 <form class="form container with-title is-center" asp-controller="Home" asp-action="Search" method="post">
     <h1 class="title">Search</h1>
     <div class="field">
@@ -31,9 +32,8 @@
     </div>
 </form>
 
-<h1>@ViewData["Title"]</h1>
 
-<p>Total: @Model.Groups.Count()</p>
+<p>Total: @Model.TotalGroups</p>
 
 <ul>
     @foreach (var group in Model.Groups)

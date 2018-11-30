@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace DataDrivenDiversity.Api.Models
 {
@@ -12,6 +13,7 @@ namespace DataDrivenDiversity.Api.Models
     {
         public string Next { get; set; }
         public string Method { get; set; }
+        [JsonProperty("total_count")]
         public int TotalCount { get; set; }
         public string Link { get; set; }
         public int Count { get; set; }
