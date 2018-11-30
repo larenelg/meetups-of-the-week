@@ -40,7 +40,7 @@ namespace DataDrivenDiversity
                 .AddHttpMessageHandler<ApiKeyHandler>();
 
             services.AddRefitClient<IStatsApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:6000"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://nlp:5000"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

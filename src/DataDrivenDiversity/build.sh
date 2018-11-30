@@ -1,1 +1,1 @@
-docker build --rm -t ddd:latest .
+docker build --rm -t app:latest .
