@@ -2,6 +2,7 @@ version: '2'
  
 services:
   app:
+    image: larenedevregistry.azurecr.io/meetups-app
     environment:
       - MeetupApiKey
     build:
@@ -14,6 +15,7 @@ services:
       - nlp
 
   nlp:
+    image: larenedevregistry.azurecr.io/meetups-nlp
     build:
       context: ./nlp
       dockerfile: Dockerfile
