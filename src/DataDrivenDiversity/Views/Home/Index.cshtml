@@ -37,9 +37,10 @@
             <tr>
                 <th>Rank</th>
                 <th>Meetup name</th>
+                <th class="text-right">Founded</th>
                 <th class="text-right">Members</th>
-                <th>Data</th>
-                <th>Join</th>
+                <th class="text-right">Events</th>
+                <th class="text-right">Join</th>
             </tr>
         </thead>
         <tbody>
@@ -48,8 +49,9 @@
             <tr>
                 <td class="w-1">@(row.index + 1)</td>
                 <td><a asp-controller="Group" asp-action="Index" asp-route-urlname="@row.group.UrlName">@row.group.Name</a></td>
+                <td class="text-right">@row.group.Created.ToString("yyyy")</td>
                 <td class="text-right">@row.group.Members</td>
-                <td class="w-1 text-right"><a asp-controller="Group" asp-action="Index" asp-route-urlname="@row.group.UrlName"><i class="fe fe-bar-chart-2"></i></a></td>
+                <td class="w-1 text-right"><a asp-controller="Group" asp-action="Events" asp-route-urlname="@row.group.UrlName"><i class="fe fe-bar-chart-2"></i></a></td>
                 <td class="w-1 text-right"><a href="https://www.meetup.com/@row.group.UrlName/" title="Join @row.group.Name (takes you to external webpage)" target="_blank"><i class="fe fe-external-link"></i></a></td>
             </tr>
             }

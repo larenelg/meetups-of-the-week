@@ -3,14 +3,15 @@
 ViewData["Title"] = $"{Model.GroupUrlName} Events ({@Model.Events.Count()})";
 }
 
-<div class="card">
+<div class="card-body">
+    <a asp-controller="Group" asp-action="Index">&lt; Meetup details</a>
+</div>
     <div class="card-header">
         <h3 class="card-title">Attendance</h3>
     </div>
     <div class="card-body">
         <div id="chart-wrapper" style="height: 16rem"></div>
     </div>
-</div>
 <script>
     var rsvpLabels = [];
     var rsvpData = ['data1'];
@@ -35,7 +36,7 @@ ViewData["Title"] = $"{Model.GroupUrlName} Events ({@Model.Events.Count()})";
                         rsvpData
                     ],
                     labels: false,
-                    type: 'area', // default type of chart
+                    type: 'bar', // default type of chart
                     colors: {
                         'data1': tabler.colors["red"]
                     },
@@ -64,17 +65,26 @@ ViewData["Title"] = $"{Model.GroupUrlName} Events ({@Model.Events.Count()})";
     });
 </script>
 
-<div class="card-body">
-    <h3>List of events</h3>
-    <ul>
-        @foreach (var ev in Model.Events)
-        {
-            <li>
-                <a asp-controller="Group" asp-action="Event" asp-route-urlname="@Model.GroupUrlName"
-                    asp-route-id="@ev.Id">@ev.Name</a>
-                <span>@ev.Time.ToLocalTime().ToString()</span>
-            </li>
-        }
-    </ul>
-</div>
 
+<div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Event</th>
+                <th>RSVPs</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Model.Events)
+            {
+                <tr>
+                    <td>@ev.Time.ToLocalTime().ToString("h:mm tt ddd, MMM d, yyyy")</td>
+                    <td><a asp-controller="Group" asp-action="Event" asp-route-urlname="@Model.GroupUrlName"
+                asp-route-id="@ev.Id">@ev.Name</a></td>
+                    <td>@ev.YesRsvpCount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,3 +1,5 @@
+using System;
+using DataDrivenDiversity.Models.Helpers;
 using Newtonsoft.Json;
 using Refit;
 
@@ -16,5 +18,9 @@ namespace DataDrivenDiversity.Models.Domain
 
         [JsonProperty("members")]
         public int Members { get; set; }
+
+        [AliasAs("created")]
+        [JsonConverter (typeof(MillisecondEpochConverter))]
+        public DateTime Created { get; set; }
     }
 }
