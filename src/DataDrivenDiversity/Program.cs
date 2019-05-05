@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace DataDrivenDiversity
 {
@@ -14,6 +15,13 @@ namespace DataDrivenDiversity
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.Seq("http://seq:5341")
+                .CreateLogger();
+
+            Log.Information("It haz start.");
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

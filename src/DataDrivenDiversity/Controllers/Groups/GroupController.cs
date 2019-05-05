@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DataDrivenDiversity.Api;
@@ -105,15 +106,24 @@ namespace DataDrivenDiversity.Controllers.Groups
                 }
                 plainTextDescription = Regex.Replace(plainTextDescription, @"[^\u0020-\u007E]", string.Empty);
 
-                try
-                {
-                    ev.SpeakerData = _StatsApi.ExtractSpeaker(plainTextDescription).Result;
-                }
-                catch (Exception ex)
-                {
-                    // something went wrong, but keep going
-                    ev.SpeakerData = new Models.Domain.SpeakerData();
-                }
+
+                /* using Python library */
+                // try
+                // {
+                //     ev.SpeakerData = _StatsApi.ExtractSpeaker(plainTextDescription).Result;
+                // }
+                // catch (Exception ex)
+                // {
+                //     // something went wrong, but keep going
+                //     ev.SpeakerData = new Models.Domain.SpeakerData();
+                // }
+
+                /* using Stanford NLP NER */
+                // ev.SpeakerData = new Models.Domain.SpeakerData {
+                //     Names = (new StanfordNameEntityRecognizer()).ExtractNames(plainTextDescription),
+                //     Pronouns = new List<string>()
+                // };
+                ev.SpeakerData = new Models.Domain.SpeakerData();
             };
 
             var model = new EventViewModel {

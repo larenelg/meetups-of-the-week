@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using DataDrivenDiversity.Api;
 using DataDrivenDiversity.Models.View;
 using DataDrivenDiversity.Api.Models;
+using Serilog;
 
 namespace DataDrivenDiversity.Controllers.Home
 {
@@ -38,6 +39,9 @@ namespace DataDrivenDiversity.Controllers.Home
                 Groups = groups.Results,
                 Query = query
             };
+
+            Log.Information("Loaded {total} meetups.", model.TotalGroups);
+            
             return View(model);
         }
 

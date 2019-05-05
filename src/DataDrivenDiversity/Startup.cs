@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
+using Serilog;
 
 namespace DataDrivenDiversity
 {
@@ -41,6 +42,9 @@ namespace DataDrivenDiversity
 
             services.AddRefitClient<IStatsApi>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://nlp:5000"));
+
+            services.AddRefitClient<INerApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://ner:5000"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

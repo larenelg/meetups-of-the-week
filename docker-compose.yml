@@ -9,10 +9,16 @@ services:
       context:  ./src/DataDrivenDiversity
       dockerfile: Dockerfile
     hostname: app
+    depends_on:
+      - seq
+      - nlp
+      - ner
     ports:
       - "8080:80"
     links:
       - nlp
+      - ner
+      - seq
 
   nlp:
     image: larenedevregistry.azurecr.io/meetups-nlp
@@ -24,3 +30,17 @@ services:
       - "6000:5000"
     expose:
       - "5000"
+
+  ner:
+    image: frnkenstien/corenlp
+    hostname: ner
+    ports:
+      - "9000:9000"
+
+  seq:
+    image: datalust/seq:latest
+    hostname: seq
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
