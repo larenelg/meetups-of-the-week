@@ -1,30 +1,40 @@
 @model EventViewModel
+@{
+    ViewData["Title"] = Model.Event.Name;
+}
 
-<label class="title">@Model.GroupUrlName</label>
-<h1>@Model.Event.Name</h1>
-
-<div class="container with-title">
-    <h2 class="title">Stats</h2>
-    <p>Time @Model.Event.Time</p>
-    <p>RSVPs @Model.Event.YesRsvpCount</p>
-    <p>Names extracted:</p>
-    <ul>
-    @foreach (var name in @Model.Event.SpeakerData.Names)
+<div class="card-body">
+    <h3>Stats</h3>
+    <dt>Time</dt>
+    <dd>@Model.Event.Time</dd>
+    <dt>RSVPs</dt>
+    <dd>@Model.Event.YesRsvpCount</dd>
+    
+    @if (Model.Event.SpeakerData != null)
     {
-        <li>@name</li>
+        <dt>Speaker Data:</dt>
+        <ul>
+        @foreach (var name in @Model.Event.SpeakerData.Names)
+        {
+            <li>@name</li>
+        }
+        </ul>
+        <dt>Pronouns extracted:</dt>
+        <ul>
+        @foreach (var pronoun in @Model.Event.SpeakerData.Pronouns)
+        {
+            <li>@pronoun</li>
+        }
+        </ul>
     }
-    </ul>
-    <p>Pronouns extracted:</p>
-    <ul>
-    @foreach (var pronoun in @Model.Event.SpeakerData.Pronouns)
+    else
     {
-        <li>@pronoun</li>
+        <p>No speaker data available for this event.</p>
     }
-    </ul>
 </div>
 
 
-<div class="container with-title">
-    <h2 class="title">Description</h2>
+<div class="card-body">
+    <h3>Description</h3>
     @Html.Raw(Model.Event.Description)
 </div>

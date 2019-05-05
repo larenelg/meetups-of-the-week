@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
+
 <head>
     <partial name="_MetaPartial" />
-    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
 
     <title>@ViewData["Title"] - DataDrivenDiversity</title>
@@ -11,37 +12,56 @@
     <link href="~/css/site.css" rel="stylesheet" /> -->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-    <script src="./assets/js/require.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <!-- <script src="~/assets/js/require.min.js"></script>
     <script>
-      requirejs.config({
-          baseUrl: '.'
-      });
-    </script>
+        requirejs.config({
+            baseUrl: '.'
+        });
+    </script> -->
     <!-- Dashboard Core -->
     <link href="~/assets/css/dashboard.css" rel="stylesheet" />
-    <script src="~/assets/js/dashboard.js"></script>
+    <!-- <script src="~/assets/js/dashboard.js"></script> -->
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/moment-tz.js"></script>
 </head>
-<body>
-    <div id="content">
-        <nav class="container with-title is-center">
-            <label class="title">Navigation</label>
-            <ul>
-                <li><a asp-action="Index" asp-controller="Home">Meetup List</a></li>
-                <li><a asp-action="Index" asp-controller="Categories">Categories</a></li>
-                <li><a asp-action="Index" asp-controller="Cities">Cities</a></li>
-            </ul>
-        </nav>
 
-        <main class="container with-title">
-            @RenderBody()
-        </main>
+<body>
+    <div class="page">
+        <div class="flex-fill" id="content">
+            <div class="header py-4">
+                <div class="container">
+                    <h1>Data Driven Diversity</h1>
+                </div>
+            </div>
+
+            <main class="container">
+                <div class="page-header"><h2>@ViewData["Title"]</h2></div>
+                <div class="row">
+                    <div class="col-lg-3 order-lg-1 mb-4">
+                        <label class="title">Navigation</label>
+                        <ul>
+                            <li><a asp-action="Index" asp-controller="Home">Meetup List</a></li>
+                            <li><a asp-action="Index" asp-controller="Categories">Categories</a></li>
+                            <li><a asp-action="Index" asp-controller="Cities">Cities</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="card">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <hr />
+        <footer>
+            <p>&copy; 2019- DataDrivenDiversity</p>
+        </footer>
     </div>
-    
-    <hr />
-    <footer>
-        <p>&copy; 2018 - DataDrivenDiversity</p>
-    </footer>
     @RenderSection("Scripts", required: false)
 </body>
+
 </html>

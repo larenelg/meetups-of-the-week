@@ -44,10 +44,12 @@ namespace DataDrivenDiversity.Controllers.Groups
         [Route("{urlname}/events")]
         public IActionResult Events(string urlname)
         {
+            var groupName = _MeetupApi.GetGroup(urlname).Result.Name;
             var events = _MeetupApi.GetPastEvents(urlname).Result.Results;
 
             var model = new EventsViewModel
             {
+                GroupName = groupName,
                 GroupUrlName = urlname,
                 Events = events
             };
@@ -60,9 +62,9 @@ namespace DataDrivenDiversity.Controllers.Groups
         {
             var ev = _MeetupApi.GetPastEvents(urlname).Result.Results.Where(e => e.Id == id).FirstOrDefault();
 
-            if (ev.Description == null)
+            if (ev == null || ev.Description == null)
             {
-                ev.SpeakerData = new Models.Domain.SpeakerData();
+                //
             }
             else
             {
@@ -102,6 +104,8 @@ namespace DataDrivenDiversity.Controllers.Groups
                     ev.SpeakerData = null;
                 }
             };
+
+            ev.Time = ev.Time.ToLocalTime();
 
             var model = new EventViewModel {
                 GroupUrlName = urlname,

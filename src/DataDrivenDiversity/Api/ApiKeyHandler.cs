@@ -22,7 +22,7 @@ namespace DataDrivenDiversity.Api
         {
             var queryString = HttpUtility.ParseQueryString(request.RequestUri.Query);
 
-            queryString.Add("key", _configuration.GetValue<string>("MeetupApiKey"));
+            queryString.Add("key", _configuration.GetValue<string>("MEETUP_API_KEY"));
 
             var uriBuilder = new UriBuilder(request.RequestUri);
             uriBuilder.Query = queryString.ToString();

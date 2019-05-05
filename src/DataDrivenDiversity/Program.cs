@@ -20,7 +20,7 @@ namespace DataDrivenDiversity
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
-                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.Seq("http://seq.localtest.me:5341")
                 .CreateLogger();
 
             try
