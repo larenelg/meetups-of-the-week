@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
-using Serilog;
 
 namespace DataDrivenDiversity
 {
@@ -41,10 +40,10 @@ namespace DataDrivenDiversity
                 .AddHttpMessageHandler<ApiKeyHandler>();
 
             services.AddRefitClient<IStatsApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://nlp:5000"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:6000"));
 
             services.AddRefitClient<INerApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://ner:5000"));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:9000"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -62,7 +61,6 @@ namespace DataDrivenDiversity
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

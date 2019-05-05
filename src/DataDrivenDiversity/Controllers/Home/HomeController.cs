@@ -40,7 +40,7 @@ namespace DataDrivenDiversity.Controllers.Home
                 Query = query
             };
 
-            Log.Information("Loaded {total} meetups.", model.TotalGroups);
+            Log.Information("STATISTICS: Total meetups: {total}", model.TotalGroups);
             
             return View(model);
         }

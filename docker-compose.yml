@@ -1,24 +1,24 @@
 version: '2'
  
 services:
-  app:
-    image: larenedevregistry.azurecr.io/meetups-app
-    environment:
-      - MeetupApiKey
-    build:
-      context:  ./src/DataDrivenDiversity
-      dockerfile: Dockerfile
-    hostname: app
-    depends_on:
-      - seq
-      - nlp
-      - ner
-    ports:
-      - "8080:80"
-    links:
-      - nlp
-      - ner
-      - seq
+  # app:
+  #   image: larenedevregistry.azurecr.io/meetups-app
+  #   environment:
+  #     - MeetupApiKey
+  #   build:
+  #     context:  ./src/DataDrivenDiversity
+  #     dockerfile: Dockerfile
+  #   hostname: app
+  #   depends_on:
+  #     - seq
+  #     - nlp
+  #     - ner
+  #   ports:
+  #     - "8080:80"
+  #   links:
+  #     - nlp
+  #     - ner
+  #     - seq
 
   nlp:
     image: larenedevregistry.azurecr.io/meetups-nlp
@@ -28,8 +28,6 @@ services:
     hostname: nlp
     ports:
       - "6000:5000"
-    expose:
-      - "5000"
 
   ner:
     image: frnkenstien/corenlp
