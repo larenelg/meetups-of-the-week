@@ -3,64 +3,78 @@
 ViewData["Title"] = $"{Model.GroupUrlName} Events ({@Model.Events.Count()})";
 }
 
-<div class="card-body">
-    <canvas id="groupEventsChart"></canvas>
-
-    <script src="~/js/chart.js"></script>
-    <script>
-        var rsvpLabels = [];
-        var rsvpData = [];
-        var rsvpBgColor = [];
-        var rsvpBorderColor = [];
-
-        @foreach(var ev in Model.Events) {
-            @: rsvpLabels.push("@ev.Name");
-            @: rsvpData.push("@ev.YesRsvpCount");
-            @: rsvpBgColor.push("rgba(255, 99, 132, 0.5)");
-            @: rsvpBorderColor.push("rgba(255,99,132,1)");
-        }
-
-        var ctx = document.getElementById("groupEventsChart");
-
-        var groupEventsChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: rsvpLabels,
-                datasets: [{
-                    label: 'RSVPs',
-                    data: rsvpData,
-                    backgroundColor: rsvpBgColor,
-                    borderColor: rsvpBorderColor,
-                    borderWidth: 1
-                }],
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            display: false
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    </script>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Attendance</h3>
+    </div>
+    <div class="card-body">
+        <div id="chart-wrapper" style="height: 16rem"></div>
+    </div>
 </div>
+<script>
+    var rsvpLabels = [];
+    var rsvpData = ['data1'];
+    var rsvpBgColor = [];
+    var rsvpBorderColor = [];
+
+    @foreach(var ev in Model.Events) {
+        @: rsvpLabels.push("@ev.Time.ToString("d MMM yy")");
+        @: rsvpData.push(parseInt("@ev.YesRsvpCount"));
+        @: rsvpBgColor.push("rgba(255, 99, 132, 0.5)");
+        @: rsvpBorderColor.push("rgba(255,99,132,1)");
+    }
+
+    require(['c3', 'jquery'], function (c3, $) {
+        $(document).ready(function () {
+            
+            var chart = c3.generate({
+                bindto: '#chart-wrapper', // id of chart wrapper
+                data: {
+                    columns: [
+                        // each columns data
+                        rsvpData
+                    ],
+                    labels: false,
+                    type: 'area', // default type of chart
+                    colors: {
+                        'data1': tabler.colors["red"]
+                    },
+                    names: {
+                        // name of each series
+                        'data1': 'RSVPs'
+                    }
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        // name of each category
+                        categories: rsvpLabels,
+                        show: false
+                    },
+                },
+                legend: {
+                    show: true, //hide legend
+                },
+                padding: {
+                    bottom: 0,
+                    top: 0
+                },
+            });
+        });
+    });
+</script>
 
 <div class="card-body">
     <h3>List of events</h3>
     <ul>
         @foreach (var ev in Model.Events)
         {
-
-        <li> <a asp-controller="Group" asp-action="Event" asp-route-urlname="@Model.GroupUrlName"
-                asp-route-id="@ev.Id">@ev.Name</a> <span style="color: #ccc">@ev.Time.ToLocalTime()</span></li>
-        
+            <li>
+                <a asp-controller="Group" asp-action="Event" asp-route-urlname="@Model.GroupUrlName"
+                    asp-route-id="@ev.Id">@ev.Name</a>
+                <span>@ev.Time.ToLocalTime().ToString()</span>
+            </li>
         }
     </ul>
 </div>
+
