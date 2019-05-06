@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DataDrivenDiversity.Api;
+using DataDrivenDiversity.Infrastructure;
 using DataDrivenDiversity.Models.View;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,9 @@ namespace DataDrivenDiversity.Controllers.Groups
     [Route("[controller]")]
     public class GroupController : Controller
     {
+        private readonly string[] PRONOUNS =  new string[]{ "they", "her", "him", "she", "he", "his", "them" };
         private readonly IMeetupApi _MeetupApi;
+        private readonly SpeakerDataRepository _Repo;
         private readonly IStatsApi _StatsApi;
         private readonly INerApi _NerApi;
 
@@ -22,6 +25,7 @@ namespace DataDrivenDiversity.Controllers.Groups
             _StatsApi = _statsApi;
             _NerApi = _nerApi;
             _MeetupApi = _meetupApi;
+            _Repo = new SpeakerDataRepository();
         }
 
         [Route("{urlname}")]
@@ -77,25 +81,33 @@ namespace DataDrivenDiversity.Controllers.Groups
                     plainTextDescription += $" {node.InnerText}";
                 }
                 plainTextDescription = Regex.Replace(plainTextDescription, @"[^\u0020-\u007E]", string.Empty);
-
-
                 
                 try
                 {
                     /* using Python library */
-                    var pronouns = _StatsApi.ExtractSpeaker(plainTextDescription).Result.Pronouns;
+                    // var pronouns = _StatsApi.ExtractSpeaker(plainTextDescription).Result.Pronouns;
                     /* using Stanford lib */
                     var results = _NerApi.Analyse(plainTextDescription).Result;
                     var people = results.Sentences
                             .SelectMany(i => i.Entitymentions)
                             .Where(e => e.Ner == "PERSON")
                             .Select(e => e.Text)
+                            .Distinct()
                             .ToArray();
+
+                    var pronouns = people.Where(text => PRONOUNS.Contains(text.ToLowerInvariant())).ToArray();
+                    var speakers = people.Where(name => name.Contains(" ")).ToArray();
+
                     Log.Information("NLP: Speakers found for group {GroupName} event id {EventId}, {@SpeakerData}", urlname, id, people);
-                    ev.SpeakerData = new Models.Domain.SpeakerData {
+                    
+                    var speakerData = new Models.Domain.SpeakerData {
                         Pronouns = pronouns,
-                        Names = people
+                        Names = speakers
                     };
+
+                    ev.SpeakerData = speakerData;
+
+                    // _Repo.SaveSpeakerData(id, speakerData);
                 }
                 catch (Exception ex)
                 {

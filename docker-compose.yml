@@ -1,14 +1,14 @@
 version: '2'
  
 services:
-  nlp:
-    image: larenedevregistry.azurecr.io/meetups-nlp
-    build:
-      context: ./nlp
-      dockerfile: Dockerfile
-    hostname: nlp
-    ports:
-      - "6000:5000"
+  # nlp:
+  #   image: larenedevregistry.azurecr.io/meetups-nlp
+  #   build:
+  #     context: ./nlp
+  #     dockerfile: Dockerfile
+  #   hostname: nlp
+  #   ports:
+  #     - "6000:5000"
 
   ner:
     image: frnkenstien/corenlp
@@ -23,3 +23,9 @@ services:
       - "5341:80"
     environment:
       - ACCEPT_EULA=Y
+
+  # db:
+  #   image: couchdb:latest
+  #   hostname: db
+  #   ports:
+  #     - "5984:5984"
