@@ -16,7 +16,7 @@ namespace DataDrivenDiversity.Controllers.Groups
     {
         private readonly string[] PRONOUNS =  new string[]{ "they", "her", "him", "she", "he", "his", "them" };
         private readonly IMeetupApi _MeetupApi;
-        private readonly SpeakerDataRepository _Repo;
+        // private readonly SpeakerDataRepository _Repo;
         private readonly IStatsApi _StatsApi;
         private readonly INerApi _NerApi;
 
@@ -25,7 +25,7 @@ namespace DataDrivenDiversity.Controllers.Groups
             _StatsApi = _statsApi;
             _NerApi = _nerApi;
             _MeetupApi = _meetupApi;
-            _Repo = new SpeakerDataRepository();
+            // _Repo = new SpeakerDataRepository();
         }
 
         [Route("{urlname}")]
@@ -107,7 +107,6 @@ namespace DataDrivenDiversity.Controllers.Groups
 
                     ev.SpeakerData = speakerData;
 
-                    // _Repo.SaveSpeakerData(id, speakerData);
                 }
                 catch (Exception ex)
                 {
@@ -116,6 +115,8 @@ namespace DataDrivenDiversity.Controllers.Groups
                     ev.SpeakerData = null;
                 }
             };
+
+            // _Repo.SaveSpeakerData(id, ev.SpeakerData);
 
             ev.Time = ev.Time.ToLocalTime();
 
