@@ -1,0 +1,38 @@
+@model SpeakerRatioViewModel
+@{
+    ViewData["Title"] = "Speaker Gender Ratio";
+}
+
+
+<div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Speakers</th>
+                <th>Pronouns</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var group in Model.Events)
+            {
+                @foreach (var ev in group)
+                {
+                    <tr>
+                        <td>@ev.Name</td>
+                        @if (ev == null || ev.SpeakerData == null)
+                        {
+                            <td></td>
+                            <td></td>
+                        }
+                        else
+                        {
+                            <td>@(string.Join(", ", ev.SpeakerData.Names))</td>
+                            <td>@(string.Join(", ", ev.SpeakerData.Pronouns))</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

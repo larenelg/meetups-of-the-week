@@ -45,6 +45,10 @@ namespace DataDrivenDiversity
             services.AddRefitClient<INerApi>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://ner.localtest.me:9000"));
 
+            services.AddRefitClient<IGenderApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://genderapi.io/api"))
+                .AddHttpMessageHandler<GenderApiKeyHandler>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
